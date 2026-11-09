@@ -30,7 +30,6 @@ The project includes a Makefile with the standard targets:
   - Reading loop (`stash_next_line`) accumulates data from the file descriptor into the reserve until a newline is found or EOF is reached.
   - Extraction routine (`extract_line`) isolates the exact line up to the newline.
   - Cleanup routine (`clean_stash`) trims the consumed text and preserves only the remaining surplus for the next call.
-- **Direct System Calls**: Uses the standard `read` function combined with dynamic memory management (`malloc`, `free`) while strictly preventing memory leaks and $O(N^2)$ time complexity penalties.
 
 ---
 
