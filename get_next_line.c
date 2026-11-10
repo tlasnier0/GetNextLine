@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlasnier <tlasnier@learner.42.tech>        +#+  +:+       +#+        */
+/*   By: tlasnier <tlasnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 10:24:29 by tlasnier          #+#    #+#             */
-/*   Updated: 2026/11/09 16:43:31 by tlasnier         ###   ########.fr       */
+/*   Updated: 2026/11/10 08:57:06 by tlasnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@ char	*stash_next_line(char *stash, int fd)
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (NULL);
-	rreturn = BUFFER_SIZE;
-	if (!ft_strchr(stash, '\n'))
 	{
-		while (rreturn > 0)
+		free(stash);
+		return (NULL);
+	}
+	rreturn = BUFFER_SIZE;
+	while (rreturn > 0 && !ft_strchr(stash, '\n'))
+	{
+		rreturn = read(fd, buffer, BUFFER_SIZE);
+		if (rreturn < 0)
 		{
-			rreturn = read(fd, buffer, BUFFER_SIZE);
-			if (rreturn < 0)
-				return (free(buffer), free(stash), NULL);
-			buffer[rreturn] = '\0';
-			stash = ft_strjoin(stash, buffer);
-			if (ft_strchr(buffer, '\n'))
-				rreturn = 0;
+			free(buffer);
+			free(stash);
+			return (NULL);
 		}
+		buffer[rreturn] = '\0';
+		stash = ft_strjoin(stash, buffer);
 	}
 	free(buffer);
 	return (stash);
@@ -62,7 +64,7 @@ char	*clean_stash(char *stash)
 		i = ft_strlen(stash);
 	res = ft_substr(stash, i, ft_strlen(stash));
 	free(tofree);
-	if (res[0] == '\0')
+	if (!res || res[0] == '\0')
 	{
 		free(res);
 		return (NULL);
@@ -86,7 +88,32 @@ char	*get_next_line(int fd)
 	}
 	res = extract_line(stash);
 	if (!res)
+	{
+		free(stash);
+		stash = NULL;
 		return (NULL);
+	}
 	stash = clean_stash(stash);
 	return (res);
 }
+
+/* #include <fcntl.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	int		fd;
+	char	*line;
+
+	fd = open("test.txt", O_RDONLY);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
+} */
