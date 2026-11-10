@@ -15,14 +15,14 @@ Features:
 ## Instructions
 
 ### Compilation
-This project does not require a `Makefile` and is compiled directly using `cc` with the standard 42 flags (`-Wall -Wextra -Werror`).
+This project does not require a `Makefile` and is compiled directly using `cc` with the standard flags (`-Wall -Wextra -Werror`).
 
 - **Compile with a custom `BUFFER_SIZE`** (e.g., `42`):
 ```bash
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c -o gnl
 ```
 
-- **Compile without the `-D BUFFER_SIZE` flag** (uses the default `BUFFER_SIZE` of `2048` defined in `get_next_line.h`):
+- **Compile without the `-D BUFFER_SIZE` flag** (uses the default `BUFFER_SIZE` of `128` defined in `get_next_line.h`):
 ```bash
 cc -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c main.c -o gnl
 ```

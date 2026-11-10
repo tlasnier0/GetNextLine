@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlasnier <tlasnier@learner.42.tech>        +#+  +:+       +#+        */
+/*   By: tlasnier <tlasnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 10:26:49 by tlasnier          #+#    #+#             */
-/*   Updated: 2026/11/10 08:37:23 by tlasnier         ###   ########.fr       */
+/*   Updated: 2026/11/10 09:00:34 by tlasnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2048
+#  define BUFFER_SIZE 128
 # endif
 
 // get_next_line_utils.c
